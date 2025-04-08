@@ -28,7 +28,9 @@ class LocationWidget extends StatelessWidget {
         "32 Llanberis Close, Tonteg, CF38 1HR",
         style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
       ),
-      trailing: Icon(Icons.arrow_forward_ios),
+      trailing: Icon(
+        Icons.arrow_forward_ios
+      ),
     );
   }
 }
