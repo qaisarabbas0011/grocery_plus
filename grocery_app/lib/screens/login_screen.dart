@@ -16,10 +16,12 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   String? name;
   @override
   void dispose() {
     emailController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
@@ -87,7 +89,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         Icons.lock,
                         color: AppColors.primaryColor,
                       ),
-                      controller: emailController,
+                      controller: passwordController,
+                      
                       suffixIcon: Icon(
                         Icons.visibility_off,
                       ),
