@@ -8,6 +8,9 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Cart screen"),
+         actions:[
+          IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart)),
+         ],
       ),
     );
   }

@@ -13,6 +13,7 @@ class ForgetPasswordScreen extends StatefulWidget {
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final TextEditingController emailController = TextEditingController();
+
   @override
   void dispose() {
     emailController.dispose();
@@ -59,12 +60,14 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 height: 16,
               ),
               CustomTextField(
-                  hintText: "Enter you mail",
-                  prefixIcon: Icon(
-                    Icons.mail,
-                    color: AppColors.primaryColor,
-                  ),
-                  controller: emailController),
+                hintText: "Enter your email",
+                prefixIcon: Icon(
+                  Icons.mail,
+                  color: AppColors.primaryColor,
+                ),
+                controller: emailController,
+                keyboardType: TextInputType.emailAddress,  // Correct usage here
+              ),
               const SizedBox(
                 height: 250,
               ),

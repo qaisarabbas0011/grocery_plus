@@ -17,7 +17,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  String? name;
+
   @override
   void dispose() {
     emailController.dispose();
@@ -30,25 +30,31 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 50,
-              ),
-              Image.asset(
-                "images/pics.png",
-                height: 100,
-                width: 200,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                child: Column(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 40),
+                
+                // Animated Logo
+                AnimatedOpacity(
+                  opacity: 1.0,
+                  duration: const Duration(seconds: 2),
+                  child: Image.asset(
+                    "images/pics.png",
+                    height: 120,
+                    width: 240,
+                  ),
+                ),
+                
+                const SizedBox(height: 20),
+
+                // Welcome Text with App Name
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Welcome to ",
+                    Text("Welcome to",
                         style: GoogleFonts.poppins(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
@@ -56,99 +62,117 @@ class _LoginScreenState extends State<LoginScreen> {
                         )),
                     Text("Grocery Plus",
                         style: GoogleFonts.poppins(
-                          fontSize: 24,
+                          fontSize: 28,
                           fontWeight: FontWeight.bold,
                           color: AppColors.primaryColor,
                         )),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: 10),
                     Text("Please Login to your Account!",
                         style: GoogleFonts.poppins(
-                          fontSize: 14,
+                          fontSize: 16,
                           fontWeight: FontWeight.w400,
                           color: AppColors.fontGrayColor,
                         )),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    CustomTextField(
-                      hintText: "Email",
-                      prefixIcon: Icon(
-                        Icons.mail,
-                        color: AppColors.primaryColor,
-                      ),
-                      controller: emailController,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    CustomTextField(
-                      hintText: "Password",
-                      prefixIcon: Icon(
-                        Icons.lock,
-                        color: AppColors.primaryColor,
-                      ),
-                      controller: passwordController,
-                      
-                      suffixIcon: Icon(
-                        Icons.visibility_off,
-                      ),
-                    ),
-                    Align(
-                        alignment: Alignment.topRight,
-                        child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (c) => ForgetPasswordScreen()));
-                            },
-                            child: Text("Forget Password?"))),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    PrimaryButton(
-                      title: "Next",
-                      icon: Icons.arrow_forward,
-                      ontap: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            (MaterialPageRoute(builder: (c) => BottomNavBar())),
-                            (route) => false);
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Don't have an Account?"),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (c) => SignUpScreen()));
-                          },
-                          child: Text(
-                            "SignUp",
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.primaryColor),
-                          ),
-                        )
-                      ],
-                    )
                   ],
                 ),
-              ),
-            ],
+                
+                const SizedBox(height: 30),
+
+                // Custom Email and Password Fields
+                CustomTextField(
+                  hintText: "Email",
+                  prefixIcon: Icon(
+                    Icons.mail,
+                    color: AppColors.primaryColor,
+                  ),
+                  controller: emailController,
+                ),
+                
+                const SizedBox(height: 20),
+
+                CustomTextField(
+                  hintText: "Password",
+                  prefixIcon: Icon(
+                    Icons.lock,
+                    color: AppColors.primaryColor,
+                  ),
+                  controller: passwordController,
+                  suffixIcon: Icon(Icons.visibility_off),
+                ),
+                
+                const SizedBox(height: 10),
+
+                // Forget Password Link
+                Align(
+                  alignment: Alignment.topRight,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ForgetPasswordScreen()),
+                      );
+                    },
+                    child: Text(
+                      "Forgot Password?",
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                  ),
+                ),
+                
+                const SizedBox(height: 50),
+
+                // Next Button
+                PrimaryButton(
+                  title: "Next",
+                  icon: Icons.arrow_forward,
+                  ontap: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => const BottomNavBar()),
+                      (route) => false,
+                    );
+                  },
+                ),
+
+                const SizedBox(height: 20),
+
+                // Sign Up Link
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an Account?",
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.fontColor,
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const SignUpScreen()),
+                        );
+                      },
+                      child: Text(
+                        "Sign Up",
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.primaryColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

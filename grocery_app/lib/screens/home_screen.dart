@@ -1,64 +1,96 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_plus/constants/groccery_item.dart';
-import 'package:grocery_plus/widgets/custom_text_field.dart';
-import 'package:grocery_plus/widgets/home_card_widget.dart';
-import 'package:grocery_plus/widgets/location_widget.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+ final groceryItem = GroceryItem();
+
+  HomeScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
-    var searchController = TextEditingController();
-    GrocceryItem item = GrocceryItem();
+    final items = groceryItem.vegetable;
+
     return Scaffold(
-        body: SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 20.0),
-        child: Column(children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Grocery Plus",
-                style: GoogleFonts.poppins(
-                    fontSize: 20, fontWeight: FontWeight.w600),
-              ),
-              Icon(Icons.notifications_outlined)
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          LocationWidget(),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.02,
-          ),
-          CustomTextField(
-              hintText: "Search here",
-              prefixIcon: Icon(Icons.search),
-              controller: searchController),
-          SizedBox(
-            height: 12,
-          ),
-          Expanded(
-            child: GridView.builder(
-                itemCount: item.vegtable.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: 8,
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 20),
-                itemBuilder: (context, index) {
-                  return HomeCardWidget(
-                    imageUrl: item.vegtable[index]['image'],
-                    title: item.vegtable[index]['title'],
-                    rating: item.vegtable[index]['rating'],
-                  );
-                }),
-          )
-        ]),
+      appBar: AppBar(
+        title: const Text('Grocery Shop'),
+        centerTitle: true,
+        backgroundColor: Colors.green,
       ),
-    ));
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GridView.builder(
+          itemCount: items.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 12,
+            childAspectRatio: 0.75,
+          ),
+          itemBuilder: (context, index) {
+            final item = items[index];
+            return Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Image
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius:
+                          const BorderRadius.vertical(top: Radius.circular(12)),
+                      child: Image.network(
+                        item['image']!,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  // Title & Price
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(item['title']!,
+                            style:
+                                const TextStyle(fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 4),
+                        Text('Rating: ${item['rating']} ⭐'),
+                        const SizedBox(height: 4),
+                        Text('Rs ${item['price']}',
+                            style: const TextStyle(color: Colors.green)),
+                      ],
+                    ),
+                  ),
+                  // Button
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        onPressed: () {},
+                        icon: const Icon(Icons.add_shopping_cart,
+                            color: Colors.white),
+                        label: const Text("Add to Cart"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
   }
 }

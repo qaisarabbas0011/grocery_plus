@@ -8,6 +8,14 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Profile"),
+        actions:[
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.logout),
+          ),
+          
+        ],
+       
       ),
     );
   }

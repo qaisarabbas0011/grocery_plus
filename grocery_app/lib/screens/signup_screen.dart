@@ -16,13 +16,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
-  final TextEditingController passswordController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   @override
   void dispose() {
     nameController.dispose();
     emailController.dispose();
     phoneController.dispose();
-    passswordController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
@@ -30,108 +31,108 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset(
-                "images/splash_image.png",
-                height: 100,
-                width: 200,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  "Please Create an Account!",
-                  style: GoogleFonts.poppins(
-                      fontSize: 16,
-                      color: AppColors.primaryColor,
-                      fontWeight: FontWeight.w500),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "images/splash_image.png",
+                  height: 120,
+                  width: 240,
                 ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              CustomTextField(
-                  hintText: "UserName",
+                const SizedBox(height: 30),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Create Your Account",
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      color: AppColors.primaryColor,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                CustomTextField(
+                  hintText: "Username",
                   prefixIcon: Icon(
                     Icons.person,
                     color: AppColors.primaryColor,
                   ),
-                  controller: nameController),
-              const SizedBox(
-                height: 16,
-              ),
-              CustomTextField(
+                  controller: nameController,
+                ),
+                const SizedBox(height: 16),
+                CustomTextField(
                   hintText: "Email",
                   prefixIcon: Icon(
                     Icons.email,
                     color: AppColors.primaryColor,
                   ),
-                  controller: emailController),
-              const SizedBox(
-                height: 16,
-              ),
-              CustomTextField(
+                  controller: emailController,
+                ),
+                const SizedBox(height: 16),
+                CustomTextField(
                   hintText: "Phone Number",
                   prefixIcon: Icon(
                     Icons.phone,
                     color: AppColors.primaryColor,
                   ),
-                  controller: phoneController),
-              const SizedBox(
-                height: 16,
-              ),
-              CustomTextField(
+                  controller: phoneController,
+                ),
+                const SizedBox(height: 16),
+                CustomTextField(
                   hintText: "Password",
                   prefixIcon: Icon(
                     Icons.lock,
                     color: AppColors.primaryColor,
                   ),
                   suffixIcon: Icon(Icons.visibility_off),
-                  controller: nameController),
-              const SizedBox(
-                height: 80,
-              ),
-              // Spacer(),
-              PrimaryButton(title: "SignUp", icon: Icons.create, ontap: () {}),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Already have an account?",
-                    style: GoogleFonts.poppins(fontSize: 14),
-                  ),
-                  const SizedBox(
-                    width: 6,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (c) => LoginScreen()));
-                    },
-                    child: Text(
-                      "Login",
+                  controller: passwordController,
+                ),
+                const SizedBox(height: 50),
+                PrimaryButton(
+                  title: "Sign Up",
+                  icon: Icons.create,
+                  ontap: () {},
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Already have an account?",
                       style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.fontGrayColor,
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (c) => LoginScreen()),
+                        );
+                      },
+                      child: Text(
+                        "Login",
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.primaryColor),
+                          color: AppColors.primaryColor,
+                        ),
+                      ),
                     ),
-                  )
-                ],
-              )
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
-      )),
+      ),
     );
   }
 }

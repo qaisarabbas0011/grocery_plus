@@ -3,32 +3,33 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final String hintText;
   final Icon prefixIcon;
-  final Icon? suffixIcon;
-  final Function()? ontap;
   final TextEditingController controller;
+  final TextInputType keyboardType;
+  final Widget? suffixIcon;
+
   const CustomTextField({
     super.key,
     required this.hintText,
     required this.prefixIcon,
     required this.controller,
+    this.keyboardType = TextInputType.text, // Default to TextInputType.text
     this.suffixIcon,
-    this.ontap,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      keyboardType: keyboardType,
       decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: hintText,
-          prefixIcon: prefixIcon,
-          fillColor: Color(0xffF0F1F2),
-          filled: true,
-          suffixIcon: suffixIcon,
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.transparent))),
+        hintText: hintText,
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      ),
     );
   }
 }

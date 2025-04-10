@@ -1,53 +1,83 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_plus/constants/colors.dart';
 
 class HomeCardWidget extends StatelessWidget {
   final String imageUrl;
   final String title;
-  final String rating;
-  const HomeCardWidget(
-      {super.key,
-      required this.imageUrl,
-      required this.title,
-      required this.rating});
+  final double rating;
+
+  const HomeCardWidget({
+    super.key,
+    required this.imageUrl,
+    required this.title,
+    required this.rating,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.2,
-      width: MediaQuery.of(context).size.width * 0.4,
-      decoration: BoxDecoration(
-        color: AppColors.whiteColor,
-        borderRadius: BorderRadius.circular(9),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.network(
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 🖼 Image
+          ClipRRect(
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+            child: Image.network(
               imageUrl,
-              height: 80,
+              height: 120,
+              width: double.infinity,
+              fit: BoxFit.cover,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ),
+
+          // 📝 Title and Rating
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title),
+                Text(title,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16)),
+                const SizedBox(height: 4),
                 Row(
                   children: [
-                    Text(rating),
-                    Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                      size: 12,
-                    )
+                    const Icon(Icons.star, size: 16, color: Colors.amber),
+                    const SizedBox(width: 4),
+                    Text(rating.toString()),
                   ],
-                )
+                ),
               ],
-            )
-          ],
-        ),
+            ),
+          ),
+
+          const Spacer(), // 🧱 Pushes button to the bottom
+
+          // 🛒 Button
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  // 👇 Add your action here (e.g., add to cart)
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('$title added to cart')),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: const Text("Add to Cart"),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
