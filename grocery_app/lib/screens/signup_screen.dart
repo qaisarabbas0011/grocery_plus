@@ -38,7 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  "images/splash_image.png",
+                  "images/pics.png",
                   height: 120,
                   width: 240,
                 ),
