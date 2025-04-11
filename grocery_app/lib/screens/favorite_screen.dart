@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_plus/widgets/favorite_card_widget.dart';
 
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});
@@ -8,14 +9,12 @@ class FavoriteScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Favorite Screen"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed("favorite");
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => FavoriteScreen()));
-            },
-            icon: const Icon(Icons.favorite)),
-        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+        child: ListView.builder(itemBuilder: (context, index) {
+          return FavoriteCardWidget();
+        }),
       ),
     );
   }
